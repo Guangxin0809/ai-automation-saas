@@ -13,20 +13,21 @@ const Page = () => {
   const trpc = useTRPC()
   const { data } = useQuery(trpc.getWorkflows.queryOptions())
 
-  const handleCreateWorkflowSuccess = () => {
-    toast.success('Job queued')
-  }
-
-  const createWorkflowMutation = useMutation(
-    trpc.createWorkflow.mutationOptions({
-      onSuccess: handleCreateWorkflowSuccess
+  const testAiMutation = useMutation(
+    trpc.testAi.mutationOptions({
+      onSuccess: () => {
+        toast.success('Test AI job queued')
+      }
     })
   )
 
-  const onSayHi = async () => {
-    const res = await fetch('/api/hello')
-    console.log('hello', res)
-  }
+  const createWorkflowMutation = useMutation(
+    trpc.createWorkflow.mutationOptions({
+      onSuccess: () => {
+        toast.success('Job queued')
+      }
+    })
+  )
 
   return (
     <div className="flex flex-col justify-center items-center gap-y-6 min-w-screen min-h-screen">
@@ -40,8 +41,11 @@ const Page = () => {
         Create Workflow
       </Button>
 
-      <Button onClick={onSayHi}>
-        Say Hi
+      <Button
+        disabled={testAiMutation.isPending}
+        onClick={() => testAiMutation.mutate()}
+      >
+        Test AI
       </Button>
 
       <LogoutButton />

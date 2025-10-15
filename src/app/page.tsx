@@ -1,6 +1,8 @@
 import { caller } from '@/trpc/server'
 import { requireAuth } from '@/lib/auth-utils'
 
+import { LogoutButton } from './logout-button'
+
 const Page = async () => {
 
   await requireAuth()
@@ -10,6 +12,10 @@ const Page = async () => {
     <div>
       protected server component
       <pre>{JSON.stringify(users, null, 4)}</pre>
+
+      {users && (
+        <LogoutButton />
+      )}
     </div>
   )
 }

@@ -2,6 +2,7 @@
 
 import { z } from 'zod'
 import Link from 'next/link'
+import Image from 'next/image'
 import { toast } from 'sonner'
 import { useForm } from 'react-hook-form'
 import { useRouter } from 'next/navigation'
@@ -91,6 +92,12 @@ export const LoginForm = () => {
                     className="w-full"
                     disabled={isPending}
                   >
+                    <Image
+                      src="/github.svg"
+                      alt="Github"
+                      width={20}
+                      height={20}
+                    />
                     Continue with Github
                   </Button>
                   <Button
@@ -99,6 +106,12 @@ export const LoginForm = () => {
                     className="w-full"
                     disabled={isPending}
                   >
+                    <Image
+                      src="/google.svg"
+                      alt="Google"
+                      width={20}
+                      height={20}
+                    />
                     Continue with Google
                   </Button>
                 </div>

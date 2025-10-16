@@ -13,6 +13,7 @@ import {
 } from 'lucide-react'
 
 import { authClient } from '@/lib/auth-client'
+import { useHasActiveSubscription } from '@/features/subscriptions/hooks/use-subscription'
 import {
   Sidebar,
   SidebarContent,
@@ -52,6 +53,7 @@ export const AppSidebar = () => {
 
   const router = useRouter()
   const pathname = usePathname()
+  const { hasActiveSubscription, isLoading } = useHasActiveSubscription()
 
   const onSignout = () => {
     authClient.signOut({
@@ -111,21 +113,23 @@ export const AppSidebar = () => {
       </SidebarContent>
       <SidebarFooter>
         <SidebarMenu>
-          <SidebarMenuItem>
-            <SidebarMenuButton
-              tooltip="Upgrade to Pro"
-              className="gap-x-4 h-10 px-4"
-              onClick={() => {}}
-            >
-              <StarIcon size={16} />
-              <span>Upgrade to Pro</span>
-            </SidebarMenuButton>
-          </SidebarMenuItem>
+          {!hasActiveSubscription && !isLoading && (
+            <SidebarMenuItem>
+              <SidebarMenuButton
+                tooltip="Upgrade to Pro"
+                className="gap-x-4 h-10 px-4"
+                onClick={() => authClient.checkout({ slug: 'pro'})}
+              >
+                <StarIcon size={16} />
+                <span>Upgrade to Pro</span>
+              </SidebarMenuButton>
+            </SidebarMenuItem>
+          )}
           <SidebarMenuItem>
             <SidebarMenuButton
               tooltip="Billing Portal"
               className="gap-x-4 h-10 px-4"
-              onClick={() => {}}
+              onClick={() => authClient.customer.portal()}
             >
               <CreditCardIcon size={16} />
               <span>Billing Portal</span>

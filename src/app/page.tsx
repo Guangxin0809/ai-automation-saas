@@ -17,6 +17,9 @@ const Page = () => {
     trpc.testAi.mutationOptions({
       onSuccess: () => {
         toast.success('Test AI job queued')
+      },
+      onError: () => {
+        toast.error('Something went wrong')
       }
     })
   )
@@ -25,6 +28,9 @@ const Page = () => {
     trpc.createWorkflow.mutationOptions({
       onSuccess: () => {
         toast.success('Job queued')
+      },
+      onError: () => {
+        toast.error('Something went wrong')
       }
     })
   )

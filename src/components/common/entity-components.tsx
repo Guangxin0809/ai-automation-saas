@@ -1,6 +1,7 @@
 import Link from "next/link";
-import { PlusIcon } from "lucide-react";
+import { PlusIcon, SearchIcon } from "lucide-react";
 
+import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 
 type EntityHeaderProps = {
@@ -75,6 +76,66 @@ export const EntityContainer = ({
         {children}
       </div>
       {pagination}
+    </div>
+  </div>
+);
+
+type EntitySearchProps = {
+  value: string
+  onChange: (value: string) => void
+  placeholder?: string
+}
+
+export const EntitySearch = ({
+  value,
+  onChange,
+  placeholder = "Search"
+}: EntitySearchProps) => (
+  <div className="relative ml-auto">
+    <SearchIcon size={16} className="absolute top-1/2 left-2 -translate-y-1/2 text-muted-foreground" />
+    <Input
+      value={value}
+      placeholder={placeholder}
+      onChange={e => onChange(e.target.value)}
+      className="max-w-[200px] pl-8 border-border shadow-none bg-background"
+    />
+  </div>
+);
+
+type EntityPaginationProps = {
+  page: number;
+  totalPages: number;
+  onPageChange: (page: number) => void;
+  disabled?: boolean;
+}
+
+export const EntityPagination = ({
+  page,
+  totalPages,
+  onPageChange,
+  disabled = false,
+}: EntityPaginationProps) => (
+  <div className="flex justify-between items-center gap-x-2 w-full">
+    <div className="flex-1 text-sm text-muted-foreground">
+      Page {page} of {totalPages || 1}
+    </div>
+    <div className="flex justify-end items-center space-x-2 py-4">
+      <Button
+        variant="outline"
+        size="sm"
+        disabled={page === 1 || disabled}
+        onClick={() => onPageChange(Math.max(1, page - 1))}
+      >
+        Prev
+      </Button>
+      <Button
+        variant="outline"
+        size="sm"
+        disabled={page === totalPages || totalPages === 0 || disabled}
+        onClick={() => onPageChange(Math.min(totalPages, page + 1))}
+      >
+        Next
+      </Button>
     </div>
   </div>
 );

@@ -22,41 +22,39 @@ export const WorkflowNode = ({
   showToolbar = true,
   onDelete,
   onSettings
-}: WorkflowNodeProps) => {
-  return (
-    <>
-      {showToolbar && (
-        <NodeToolbar>
-          <Button
-            size="sm"
-            variant="ghost"
-            onClick={onSettings}
-          >
-            <SettingsIcon size={16} />
-          </Button>
-
-          <Button
-            size="sm"
-            variant="ghost"
-            onClick={onDelete}
-          >
-            <TrashIcon size={16} />
-          </Button>
-        </NodeToolbar>
-      )}
-      {children}
-      {name && (
-        <NodeToolbar
-          isVisible
-          position={Position.Bottom}
-          className="max-w-[200px] text-center"
+}: WorkflowNodeProps) => (
+  <>
+    {showToolbar && (
+      <NodeToolbar>
+        <Button
+          size="sm"
+          variant="ghost"
+          onClick={onSettings}
         >
-          <p className="font-medium">{name}</p>
-          {description && (
-            <p className="truncate text-sm text-muted-foreground">{description}</p>
-          )}
-        </NodeToolbar>
-      )}
-    </>
-  );
-}
+          <SettingsIcon size={16} />
+        </Button>
+
+        <Button
+          size="sm"
+          variant="ghost"
+          onClick={onDelete}
+        >
+          <TrashIcon size={16} />
+        </Button>
+      </NodeToolbar>
+    )}
+    {children}
+    {name && (
+      <NodeToolbar
+        isVisible
+        position={Position.Bottom}
+        className="max-w-[200px] text-center"
+      >
+        <p className="font-medium">{name}</p>
+        {description && (
+          <p className="truncate text-sm text-muted-foreground">{description}</p>
+        )}
+      </NodeToolbar>
+    )}
+  </>
+);

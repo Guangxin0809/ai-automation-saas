@@ -12,9 +12,7 @@ import {
 } from "@/features/editor/components/editor";
 
 type PageProps = {
-  params: Promise<{
-    workflowId: string
-  }>
+  params: Promise<{ workflowId: string }>
 }
 
 const Page = async ({ params }: PageProps) => {

@@ -74,7 +74,7 @@ model Workflow {
   id  String  @id @default(cuid())
   name  String
   createdAt  DateTime @default(now())
-  updatedAt  DateTime @default(now()) @updatedAt
+  updatedAt  DateTime @updatedAt
   nodes Node[]
   connections Connection[]
 
@@ -95,7 +95,7 @@ model Node {
   position  Json
   data  Json  @default("{}")
   createdAt  DateTime @default(now())
-  updatedAt  DateTime @default(now()) @updatedAt
+  updatedAt  DateTime @updatedAt
   outputConnections Connection[] @relation("SourceNode")
   inputConnections  Connection[]  @relation("TargetNode")
 
@@ -108,7 +108,7 @@ model Connection {
   sourceOutput  String  @default("main")
   targetInput  String  @default("main")
   createdAt  DateTime @default(now())
-  updatedAt  DateTime @default(now()) @updatedAt
+  updatedAt  DateTime @updatedAt
 
   workflowId  String
   workflow  Workflow  @relation(fields: [workflowId], references: [id], onDelete: Cascade)

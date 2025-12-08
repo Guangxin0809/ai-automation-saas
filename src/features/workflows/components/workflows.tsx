@@ -20,7 +20,11 @@ import {
 } from "@/components/common/entity-components";
 
 import { useWorkflowsParams } from "../hooks/use-workflows-params";
-import { useCreateWorkflow, useRemoveWorkflow, useSuspenseWorkflows } from "../hooks/use-workflows";
+import {
+  useCreateWorkflow,
+  useRemoveWorkflow,
+  useSuspenseWorkflows
+} from "../hooks/use-workflows";
 
 export const WorkflowsList = () => {
 

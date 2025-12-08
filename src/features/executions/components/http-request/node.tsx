@@ -6,10 +6,11 @@ import { useReactFlow, type Node, type NodeProps } from "@xyflow/react";
 
 import { NodeStatus } from "@/components/react-flow/node-status-indicator";
 
-import { HttpRequestFormValues, HttpRequestDialog } from "./dialog";
 import { BaseExecutionNode } from "../base-execution-node";
+import { HttpRequestFormValues, HttpRequestDialog } from "./dialog";
 
 type HttpRequestData = {
+  variableName?: string;
   endpoint?: string;
   method?: "GET" | "POST" | "PUT" | "PATCH" | "DELETE";
   body?: string;

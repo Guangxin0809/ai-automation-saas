@@ -22,7 +22,8 @@ import {
   FormDescription,
   FormField,
   FormItem,
-  FormLabel
+  FormLabel,
+  FormMessage
 } from "@/components/ui/form";
 import {
   Select,
@@ -36,7 +37,7 @@ const formSchema = z.object({
   variableName: z
     .string()
     .min(1, { message: "Variable name is required" })
-    .regex(/[A-Za-z_$][A-Za-z0-9_]*$/, {
+    .regex(/^[A-Za-z_][A-Za-z0-9_]*$/, {
       message: "Variable name must start with a letter or underscore and only contains letters, numbers and underscores."
     }),
   endpoint: z.url({ message: "Please enter a valid URL" }),
@@ -123,6 +124,7 @@ export const HttpRequestDialog = ({
                     Use this name to reference the result in other nodes:{" "}
                     {`{{${watchVariableName}.httpResponse.data}}`}
                   </FormDescription>
+                  <FormMessage />
                 </FormItem>
               )}
             />
@@ -152,6 +154,7 @@ export const HttpRequestDialog = ({
                   <FormDescription>
                     The HTTP method to use for this request.
                   </FormDescription>
+                  <FormMessage />
                 </FormItem>
               )}
             />
@@ -170,6 +173,7 @@ export const HttpRequestDialog = ({
                   <FormDescription>
                     Static URL or use {"{{variables}}"} for simple values or {"{{json variable}}"} to stringify objects.
                   </FormDescription>
+                  <FormMessage />
                 </FormItem>
               )}
             />
@@ -193,6 +197,7 @@ export const HttpRequestDialog = ({
                     <FormDescription>
                       JSON with template variables. Use {"{{variables}}"} for simple values or {"{{json variable}}"} to stringify objects.
                     </FormDescription>
+                    <FormMessage />
                   </FormItem>
                 )}
               />
